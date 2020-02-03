@@ -1,0 +1,10 @@
+<% if logged_in? %>
+  <p>ログイン完了ユーザ: <%= current_user.name %></p>
+  <%= link_to '記事一覧', articles_url, class: 'btn btn-lg btn-primary' %>
+<% else %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>Welcome to the Twitter Matome Generator</h1>
+    </div>
+  </div>
+<% end %>

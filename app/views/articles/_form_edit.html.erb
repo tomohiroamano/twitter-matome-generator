@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-10">
+    <%= form_with(model: article, local: true) do |f| %>
+      <% if article.errors.any? %>
+        <div id="error_explanation" class="alert alert-warning">
+          <ul class="mb-0">
+            <% article.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :keyword, 'キーワード' %>
+        <%= f.text_field :keyword, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :tweetid, 'ツイートID' %>
+        <%= f.text_field :tweetid, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :title, 'タイトル' %>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :content, 'メッセージ' %>
+        <%= f.text_area :content, class: 'form-control', rows: 15 %>
+      </div>
+      
+      
+      <div class="form-group">
+        <%= f.label :score, 'スコア' %>
+        <%= article.score %>
+        <%# f.text_area :score, class: 'form-control', rows: 3 %>
+      </div>
+      
+            <div class="form-group">
+        <%= f.label :number, '検索するツイート数' %>
+        <%= f.text_field :number, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.radio_button :mode, :popular %>
+        <%= f.label :mode, "popular", {value: :popular, style: "display: inline-block;"} %>
+        <%= f.radio_button :mode, :recent %>
+        <%= f.label :mode, "recent", {value: :recent, style: "display: inline-block;"} %>
+        <%= f.radio_button :mode, :mixed %>
+        <%= f.label :mode, "mixed", {value: :mixed, style: "display: inline-block;"} %>
+      </div>
+    
+      <div class="form-group">
+        <%= f.label :analysisflag, '感情分析の実行フラグ' %>
+        <%= f.check_box :analysisflag, :as => :boolean %>
+      </div>
+
+      <%= f.submit '投稿', class: 'btn btn-primary' %>
+      
+    <% end %>
+  </div>
+</div>

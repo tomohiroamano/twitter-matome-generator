@@ -1,0 +1,48 @@
+<%= form_with(model: article, local: true) do |form| %>
+  <% if article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+      <% article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :keyword, 'キーワード：' %>
+    <%= form.text_field :keyword %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :tweetid, 'ツイートID：' %>
+    <%= form.text_field :tweetid %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :number, '検索するツイート数：' %>
+    <%= form.text_field :number, value: 50 %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :mode, '検索モード：' %>
+    <%= form.radio_button :mode, :popular %>
+    <%= form.label :mode, "popular", {value: :popular, style: "display: inline-block;"} %>
+    <%= form.radio_button :mode, :recent%>
+    <%= form.label :mode, "recent", {value: :recent, style: "display: inline-block;"} %>
+    <%= form.radio_button :mode, :mixed , checked: true%>
+    <%= form.label :mode, "mixed", {value: :mixed, style: "display: inline-block;"} %>
+  </div>
+    
+  <div class="field">
+    <%= form.label :analysisflag, '感情分析の実行フラグ：' %>
+    <%= form.check_box :analysisflag, :as => :boolean,checked:false %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Twitter検索', class: 'btn btn-primary btn-block' %>
+  </div>
+  
+<% end %>
