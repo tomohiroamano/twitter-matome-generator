@@ -1,5 +1,11 @@
 <% if logged_in? %>
   <p>ログイン完了ユーザ: <%= current_user.name %></p>
+  <p>最終更新日(日本時間):
+  <% @users.each do |user| %>
+    <%= user.articles.order(:updated_at).last.updated_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M:%S') %>
+  <% end %>
+  </p>
+  
   <%= link_to '記事一覧', articles_url, class: 'btn btn-lg btn-primary' %>
 <% else %>
   <div class="center jumbotron">
