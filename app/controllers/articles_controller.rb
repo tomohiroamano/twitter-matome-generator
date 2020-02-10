@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :require_user_logged_in
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :twitter_client, only: [:create]
   before_action :gcpnla_client, only: [:create]
